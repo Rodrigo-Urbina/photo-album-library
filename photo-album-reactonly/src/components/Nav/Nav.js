@@ -1,24 +1,25 @@
 import React from "react";
 import { Header, Menu } from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import Login from "../Login";
 
 const menuItems = [
   {
     name: "albums",
-    position: null
+    position: null,
   },
   {
     name: "photos",
-    position: null
+    position: null,
   },
-  {
-    name: "login",
-    position: "right"
-  }
+  // {
+  //   name: "login",
+  //   position: "right",
+  // },
 ];
 
 class Nav extends React.Component {
-  renderMenuItems = item => {
+  renderMenuItems = (item) => {
     return (
       <Menu.Item
         position={item.position}
@@ -34,11 +35,14 @@ class Nav extends React.Component {
     return (
       <Menu tabular>
         <Menu.Item>
-          <Header as="h3" icon="camera retro" floated="right" />
+          <Link to="/">
+            <Header as="h3" icon="camera retro" floated="right" />
+          </Link>
         </Menu.Item>
-        {Object.keys(menuItems).map(item => {
+        {Object.keys(menuItems).map((item) => {
           return this.renderMenuItems(menuItems[item]);
         })}
+        {/* <Login /> */}
       </Menu>
     );
   }

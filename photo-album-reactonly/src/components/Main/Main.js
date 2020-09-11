@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import * as api from "../../api";
 import { AlbumList } from "../Album";
 import { PhotoList } from "../Photo";
@@ -9,7 +9,7 @@ import { Message } from "semantic-ui-react";
 class Main extends Component {
   state = {
     albums: {},
-    photos: {}
+    photos: {},
   };
 
   componentWillMount() {
@@ -20,12 +20,12 @@ class Main extends Component {
     if (localAlbums && localPhotos) {
       this.setState({
         albums: JSON.parse(localAlbums),
-        photos: JSON.parse(localPhotos)
+        photos: JSON.parse(localPhotos),
       });
     } else {
       this.setState({
         albums: api.getAlbums(),
-        photos: api.getPhotos()
+        photos: api.getPhotos(),
       });
     }
   }
@@ -36,12 +36,12 @@ class Main extends Component {
     localStorage.setItem("photos", JSON.stringify(nextState.photos));
   }
 
-  createAlbum = album => {
+  createAlbum = (album) => {
     let albums = { ...this.state.albums };
     const timestamp = Date.now();
     albums[`album-${timestamp}`] = album;
     this.setState({
-      albums
+      albums,
     });
   };
 
@@ -49,24 +49,24 @@ class Main extends Component {
     let albums = { ...this.state.albums };
     albums[key] = updatedAlbum;
     this.setState({
-      albums
+      albums,
     });
   };
 
-  deleteAlbum = key => {
+  deleteAlbum = (key) => {
     let albums = { ...this.state.albums };
     delete albums[key];
     this.setState({
-      albums
+      albums,
     });
   };
 
-  createPhoto = photo => {
+  createPhoto = (photo) => {
     let photos = { ...this.state.photos };
     const timestamp = Date.now();
     photos[`photo-${timestamp}`] = photo;
     this.setState({
-      photos
+      photos,
     });
   };
 
@@ -74,15 +74,15 @@ class Main extends Component {
     let photos = { ...this.state.photos };
     photos[key] = updatedPhoto;
     this.setState({
-      photos
+      photos,
     });
   };
 
-  deletePhoto = key => {
+  deletePhoto = (key) => {
     let photos = { ...this.state.photos };
     delete photos[key];
     this.setState({
-      photos
+      photos,
     });
   };
 
